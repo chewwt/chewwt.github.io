@@ -1,0 +1,338 @@
+{% assign paper = site.data[page.data_key].paper %}
+{% assign _theme_key = page.theme_key | default: page.data_key %}
+{% assign _td        = site.data[_theme_key].theme %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ paper.clean_title | default: paper.title}}</title>
+  {% if paper.favicon %}<link rel="icon" type="image/png" href="{{ paper.favicon | relative_url }}">{% endif %}
+  <meta name="description" content="{{ paper.abstract | strip_html | truncatewords: 40 }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- Inject theme palette as CSS custom properties (edit _data/<key>/theme.yml to change) -->
+  {% assign t = _td.themes[_td.active] %}
+  <style>
+    :root {
+      --c-primary:       {{ t.primary }};
+      --c-primary-light: {{ t.primary_light }};
+      --c-accent:        {{ t.accent }};
+      --c-accent-light:  {{ t.accent_light }};
+      --c-bg:            {{ t.background }};
+      --c-surface:       {{ t.surface }};
+      --c-surface-light: {{ t.surface_light | default: t.background }};
+      --c-surface-alt:   {{ t.surface_alt }};
+      --c-text:          {{ t.text }};
+      --c-text-muted:    {{ t.text_muted }};
+      --c-border:        {{ t.border }};
+      --c-border-strong: {{ t.border_strong }};
+      --c-success:       {{ t.success }};
+      --c-author-bg:     {{ t.author_bg }};
+      --c-tag-text:      {{ t.tag_text }};
+    }
+  </style>
+
+  {% seo %}
+</head>
+<body>
+
+{% assign title_html = paper.title %}
+{% for macro in paper.macros %}
+  {% capture token %}[[{{ macro[0] }}]]{% endcapture %}
+  {% capture sc_span %}<span class="sc">{{ macro[1] }}</span>{% endcapture %}
+  {% assign title_html = title_html | replace: token, sc_span %}
+{% endfor %}
+
+<!-- ═══ TOPBAR ═══════════════════════════════════════════════════════════════ -->
+<nav class="topbar">
+  <a href="https://www.comp.nus.edu.sg/~lowkh/index.html" class="topbar-lab" target="_blank" rel="noopener">
+    <img src="{{ '/assets/images/glow-ai-small.png' | relative_url }}" alt="GLOW.AI" class="topbar-lab-icon">
+    <span class="topbar-lab-suffix">paper</span>
+  </a>
+  <span class="topbar-right">
+    <span class="topbar-title">{{ paper.short_title }}</span>
+    <span class="topbar-sep">·</span>
+    <span class="topbar-venue">{{ paper.venue }} {{ paper.year }}</span>
+  </span>
+</nav>
+
+<!-- ═══ HERO ═════════════════════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    {% if paper.logo %}
+    <picture>
+      {% if paper.logo.webp %}<source srcset="{{ paper.logo.webp | relative_url }}" type="image/webp">{% endif %}
+      <img src="{{ paper.logo.png | relative_url }}" alt="{{ paper.short_title }} logo" class="hero-logo__img">
+    </picture>
+    {% endif %}
+    <h1 class="paper-title">{{ title_html }}</h1>
+
+    <!-- Authors -->
+    <div class="authors-row">
+      {% for author in paper.authors %}
+        {% assign aff_idx = paper.author_affiliations[forloop.index0] %}
+        {% if author.url != "" %}
+          <a href="{{ author.url }}" class="author-chip" target="_blank" rel="noopener">
+        {% else %}
+          <span class="author-chip author-chip--no-link">
+        {% endif %}
+          {{ author.name }}
+          {% if author.equal %}<sup>*</sup>{% endif %}
+          {% if author.corresponding %}<sup>†</sup>{% endif %}
+          {% if aff_idx %}<sup>{{ aff_idx }}</sup>{% endif %}
+        {% if author.url != "" %}</a>{% else %}</span>{% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Affiliations -->
+    {% if paper.affiliations %}
+    <div class="affiliations-row">
+      {% for aff in paper.affiliations %}
+        <sup>{{ forloop.index }}</sup>{{ aff }}{% unless forloop.last %} &nbsp;·&nbsp; {% endunless %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Author notes (equal contribution, corresponding) -->
+    {% if paper.author_notes %}
+    <div class="author-notes">
+      {% for note in paper.author_notes %}
+        <span>{{ note }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Link buttons -->
+    {% if paper.links %}
+    <div class="hero-links">
+      {% for link in paper.links %}
+        <a href="{{ link.url }}" class="link-btn{% if link.primary %} link-btn--primary{% endif %}" {% unless link.url == "#" %}target="_blank" rel="noopener"{% endunless %}>
+          {% include icon.html name=link.icon %}
+          {{ link.label }}
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<!-- ═══ TEASER FIGURE ════════════════════════════════════════════════════════ -->
+{% if paper.teaser.image != "" %}
+<div class="teaser">
+  <div class="container">
+    <figure>
+      <img src="{{ paper.teaser.image | relative_url }}" alt="Teaser figure">
+      {% if paper.teaser.caption %}
+      {% assign caption_html = paper.teaser.caption %}
+      {% for macro in paper.macros %}
+        {% capture token %}[[{{ macro[0] }}]]{% endcapture %}
+        {% capture sc_span %}<span class="sc">{{ macro[1] }}</span>{% endcapture %}
+        {% assign caption_html = caption_html | replace: token, sc_span %}
+      {% endfor %}
+      <figcaption>{{ caption_html }}</figcaption>
+      {% endif %}
+    </figure>
+  </div>
+</div>
+{% endif %}
+
+<!-- ═══ MAIN BODY (content + sidebar) ═══════════════════════════════════════ -->
+<div class="paper-body">
+  <div class="paper-grid">
+
+    <!-- ── LEFT: MAIN CONTENT ─────────────────────────────────────────────── -->
+    <div class="paper-main">
+
+      <!-- Abstract -->
+      {% if paper.tagline or paper.abstract or paper.stats %}
+      <section id="abstract">
+        {% if paper.tagline %}
+          {% assign tagline_html = paper.tagline %}
+          {% for macro in paper.macros %}
+            {% capture token %}[[{{ macro[0] }}]]{% endcapture %}
+            {% capture sc_span %}<span class="sc">{{ macro[1] }}</span>{% endcapture %}
+            {% assign tagline_html = tagline_html | replace: token, sc_span %}
+          {% endfor %}
+          <p class="abstract-tagline">{{ tagline_html }}</p>
+        {% endif %}
+        {% if paper.abstract %}
+          {% assign abstract_html = paper.abstract %}
+          {% for macro in paper.macros %}
+            {% capture token %}[[{{ macro[0] }}]]{% endcapture %}
+            {% capture sc_span %}<span class="sc">{{ macro[1] }}</span>{% endcapture %}
+            {% assign abstract_html = abstract_html | replace: token, sc_span %}
+          {% endfor %}
+          <div class="abstract-text">{{ abstract_html }}</div>
+        {% endif %}
+        {% if paper.stats %}
+          <div class="stat-cards">
+            {% for stat in paper.stats %}
+            <div class="stat-card">
+              <span class="stat-card__value">{{ stat.value }}</span>
+              <span class="stat-card__label">{{ stat.label }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </section>
+      {% endif %}
+
+      {% assign content_html = content %}
+      {% for macro in paper.macros %}
+        {% capture token %}[[{{ macro[0] }}]]{% endcapture %}
+        {% capture sc_span %}<span class="sc">{{ macro[1] }}</span>{% endcapture %}
+        {% assign content_html = content_html | replace: token, sc_span %}
+      {% endfor %}
+      {{ content_html }}
+
+    </div><!-- /paper-main -->
+
+    <!-- ── RIGHT: SIDEBAR ─────────────────────────────────────────────────── -->
+    <aside class="paper-sidebar sidebar">
+
+      <!-- On this page TOC -->
+      {% if paper.on_this_page %}
+      <div class="sidebar-card sidebar-card--toc">
+        <div class="sidebar-card__heading">On This Page</div>
+        <nav class="toc-nav" aria-label="Page sections">
+          {% for item in paper.on_this_page %}
+          <a href="#{{ item.id }}" class="toc-link" data-section="{{ item.id }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+      {% endif %}
+
+      <!-- Reproducibility checklist -->
+      {% if paper.reproducibility %}
+      <div class="sidebar-card">
+        <div class="sidebar-card__heading">{{ paper.reproducibility.heading | default: "Reproducibility" }}</div>
+        <ul class="repro-list">
+          {% for item in paper.reproducibility.items %}
+          <li>
+            <span class="repro-check">{% include icon.html name="check" %}</span>
+            {{ item }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Related papers -->
+      {% if paper.related_papers %}
+      <div class="sidebar-card">
+        <div class="sidebar-card__heading">{{ paper.related_papers.heading | default: "Related Work" }}</div>
+        <ul class="sidebar-related">
+          {% for rp in paper.related_papers.papers %}
+          <li>
+            <a href="{{ rp.url }}" {% unless rp.url == "#" %}target="_blank" rel="noopener"{% endunless %}>{{ rp.title }}</a>
+            <span class="paper-venue">{{ rp.venue }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+    </aside><!-- /sidebar -->
+
+  </div><!-- /paper-grid -->
+</div><!-- /paper-body -->
+
+<!-- ═══ KEYWORDS ═════════════════════════════════════════════════════════════ -->
+{% if paper.keywords %}
+<div class="keywords-section">
+  <div class="paper-grid">
+    <div class="keywords-inner">
+      <span class="keyword-label">Keywords</span>
+      {% for kw in paper.keywords %}
+      <span class="keyword-tag">{{ kw }}</span>
+      {% endfor %}
+    </div>
+    <div aria-hidden="true"></div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ═══ CITATION ═════════════════════════════════════════════════════════════ -->
+{% if paper.bibtex %}
+<section class="citation-section" id="citation">
+  <div class="paper-grid">
+    <div>
+      <h2 class="section-heading">Citation</h2>
+      <div class="citation-block">
+        <button class="copy-btn" onclick="copyBibtex(this)" aria-label="Copy BibTeX">Copy BibTeX</button>
+        <pre id="bibtex-text">{{ paper.bibtex | strip }}</pre>
+      </div>
+    </div>
+    <div aria-hidden="true"></div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <p class="site-footer__title">{{ title_html }}</p>
+  {% if paper.links %}
+  <div class="site-footer__links">
+    {% for link in paper.links %}
+      <a href="{{ link.url }}" class="link-btn{% if link.primary %} link-btn--primary{% endif %}" {% unless link.url == "#" %}target="_blank" rel="noopener"{% endunless %}>
+        {% include icon.html name=link.icon %}
+        {{ link.label }}
+      </a>
+    {% endfor %}
+    <a href="#" class="link-btn link-btn--ghost">↑ Back to top</a>
+  </div>
+  {% endif %}
+  <p class="site-footer__meta">
+    {{ paper.venue }} {{ paper.year }}
+    &nbsp;&middot;&nbsp;
+    Built with <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>.
+  </p>
+</footer>
+
+<script>
+document.querySelectorAll('.paper-main table').forEach(function(table) {
+  var wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+  table.parentNode.insertBefore(wrap, table);
+  wrap.appendChild(table);
+});
+
+(function () {
+  var links = document.querySelectorAll('.toc-link[data-section]');
+  if (!links.length) return;
+  var ids = Array.from(links).map(function (l) { return l.dataset.section; });
+  var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  function update() {
+    var current = '';
+    var mid = window.innerHeight / 2;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top <= mid) current = s.id;
+    });
+    links.forEach(function (l) { l.classList.toggle('toc-link--active', l.dataset.section === current); });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+function copyBibtex(btn) {
+  const text = document.getElementById('bibtex-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy BibTeX';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

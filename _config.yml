@@ -1,0 +1,21 @@
+title: Research Paper Project Page
+baseurl: ""
+url: "https://chewwt.github.io"
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - refs/
+  - node_modules/

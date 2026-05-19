@@ -1,0 +1,162 @@
+# ============================================================
+# PAPER DATA  — edit this file to populate your project page
+# ============================================================
+
+macros:
+  bolt: "BoLT"
+
+# title: rendered in the hero (supports HTML and [[macros]])
+# clean_title: plain-text fallback for the browser tab
+# short_title: topbar
+title: '<span class="title-highlight">[[bolt]]</span>: A Benchmark to Democratize Black-box Optimization Research for Expensive LLM Tasks'
+clean_title: "BoLT: A Benchmark to Democratize Black-box Optimization Research for Expensive LLM Tasks"
+short_title: "BoLT"
+
+favicon: "assets/images/bolt/favicon.png"
+
+logo:
+  png: "assets/images/bolt/animated-logo.png"
+  webp: "assets/images/bolt/animated-logo.webp"
+
+venue: "arXiv"
+venue_url: ""
+year: 2026
+
+# ============================================================
+# AUTHORS
+# Set equal: true for equal-contribution, corresponding: true for ✉
+# Leave url blank ("") to skip linking the name
+# ============================================================
+authors:
+  - name: "Ruth Wan Theng Chew"
+    url: "https://ruthchewwt.com/"
+  - name: "Zhiliang Chen"
+    url: "https://chenzhiliang94.github.io/home/"
+  - name: "Apivich Hemachandra"
+    url: "https://apivich.me/"
+  - name: "Bryan Kian Hsiang Low"
+    url: "https://www.comp.nus.edu.sg/~lowkh/"
+
+# Each author's affiliation index (1-based, matches affiliations list)
+author_affiliations: [1, 1, 1, 1]
+
+affiliations:
+  - "National University of Singapore"
+
+# ============================================================
+# LINKS  (add/remove/reorder freely)
+# icon options: pdf, arxiv, code, demo, video, dataset, slides, poster, blog, huggingface
+# ============================================================
+links:
+  - label: "arXiv"
+    url: "https://arxiv.org/abs/2605.17000"
+    icon: arxiv
+    primary: true
+  - label: "Code"
+    url: "https://github.com/chewwt/bolt"
+    icon: github
+  - label: "Docs"
+    url: "https://bolt-bench.readthedocs.io/en/latest/"
+    icon: docs
+  - label: "Models"
+    url: "https://huggingface.co/collections/chewwt/bolt-models"
+    icon: huggingface
+
+# ============================================================
+# ABSTRACT
+# ============================================================
+tagline: >
+  [[bolt]] is the first BBO benchmark grounded in real LLM experiments, accessible without large-scale compute.
+
+abstract: >
+  LLMs involve expensive, derivative-free decisions — hyperparameters, data mixtures, prompts — that black-box
+  optimization (BBO) is built to handle. Yet most BBO research validates on synthetic functions that miss the real
+  structure of LLM tasks. [[bolt]] provides surrogate-based benchmarks grounded in real LLM experiments, so everyone
+  can evaluate BBO methods against realistic objectives.
+
+stats:
+  - value: "3"
+    label: "task families"
+  - value: "10"
+    label: "LLM tasks"
+  - value: "20k+"
+    label: "real experiments"
+  - value: "4"
+    label: "emulators"
+
+# ============================================================
+# TEASER / OVERVIEW FIGURE
+# Set image to "" to hide the section
+# ============================================================
+teaser:
+  image: "assets/images/bolt/overview.png"
+  caption: >
+    <strong>[[bolt]] replaces slow LLM calls with a fast emulator.</strong>
+    Without an emulator (left), a BBO loop must query real LLM runs which are slow and costly.
+    With [[bolt]] (right), the BBO loop queries a lightweight emulator trained on real LLM experiments,
+    returning emulated observations almost instantly and at negligible cost.
+
+# ============================================================
+# ON THIS PAGE — sticky sidebar TOC (remove to hide)
+# Each item needs a matching id="..." on an element in index.md
+# id: "abstract" is always available (rendered by the layout)
+# ============================================================
+on_this_page:
+  - label: "Abstract"
+    id: "abstract"
+  - label: "Tasks"
+    id: "tasks"
+  - label: "Emulators"
+    id: "emulators"
+  - label: "Results"
+    id: "results"
+  - label: "Get Started"
+    id: "get-started"
+  - label: "Citation"
+    id: "citation"
+
+# ============================================================
+# SIDEBAR — RELATED PAPERS FROM THE LAB
+# Remove the whole 'related_papers' block to hide the section
+# ============================================================
+# related_papers:
+#   heading: "From This Lab"
+#   papers:
+#     - title: "Paper title"
+#       venue: "Venue Year"
+#       url: "#"
+
+# ============================================================
+# REPRODUCIBILITY CHECKLIST
+# ============================================================
+# reproducibility:
+#   heading: "Reproducibility"
+#   items:
+#     - "Code released on GitHub"
+#     - "Emulator models on HuggingFace Hub"
+#     - "20k+ real LLM evaluations backing all emulators"
+#     - "All emulators validated via Spearman rank correlation"
+#     - "Results averaged over 5 seeds with 95% CIs"
+
+# ============================================================
+# KEYWORDS (shown as chips at the bottom)
+# ============================================================
+# keywords:
+#   - "Bayesian Optimization"
+#   - "Black-box Optimization"
+#   - "LLM Benchmarks"
+#   - "Hyperparameter Optimization"
+#   - "Data Mixture Optimization"
+#   - "Prompt Optimization"
+#   - "Emulators"
+
+# ============================================================
+# BIBTEX CITATION
+# ============================================================
+bibtex: |
+  @article{chew2026bolt,
+    title     = {BoLT: A Benchmark to Democratize Black-box Optimization Research for Expensive {LLM} Tasks},
+    author    = {Chew, Ruth Wan Theng and Chen, Zhiliang and Hemachandra, Apivich and Low, Bryan Kian Hsiang},
+    journal   = {arXiv preprint arXiv:2605.17000},
+    year      = {2026}
+  }

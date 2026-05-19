@@ -1,0 +1,122 @@
+# ============================================================
+# COLOR THEME CONFIGURATION
+# Change 'active' to instantly switch the entire site's palette.
+# Available themes: academic, minimal, deepmind, warm, dark
+# ============================================================
+active: glowai
+
+themes:
+
+  # Clean blue/white — classic conference paper look
+  academic:
+    name: Academic Blue
+    primary: "#2563eb"
+    primary_light: "#dbeafe"
+    accent: "#f59e0b"
+    accent_light: "#fef3c7"
+    background: "#ffffff"
+    surface: "#f8fafc"
+    surface_light: "#fcfdfe"
+    surface_alt: "#f1f5f9"
+    text: "#1e293b"
+    text_muted: "#64748b"
+    border: "#e2e8f0"
+    border_strong: "#cbd5e1"
+    success: "#10b981"
+    author_bg: "#f8fafc"
+    tag_text: "#1d4ed8"
+
+  # Pure black/white/gray — maximum readability
+  minimal:
+    name: Minimal
+    primary: "#18181b"
+    primary_light: "#f4f4f5"
+    accent: "#18181b"
+    accent_light: "#f4f4f5"
+    background: "#ffffff"
+    surface: "#fafafa"
+    surface_light: "#fdfdfd"
+    surface_alt: "#f4f4f5"
+    text: "#18181b"
+    text_muted: "#71717a"
+    border: "#e4e4e7"
+    border_strong: "#a1a1aa"
+    success: "#16a34a"
+    author_bg: "#fafafa"
+    tag_text: "#3f3f46"
+
+  # Google DeepMind-inspired: clean, blue-forward
+  deepmind:
+    name: DeepMind
+    primary: "#1a73e8"
+    primary_light: "#e8f0fe"
+    accent: "#34a853"
+    accent_light: "#e6f4ea"
+    background: "#ffffff"
+    surface: "#f8f9fa"
+    surface_light: "#fcfdfd"
+    surface_alt: "#e8f0fe"
+    text: "#202124"
+    text_muted: "#5f6368"
+    border: "#dadce0"
+    border_strong: "#bdc1c6"
+    success: "#34a853"
+    author_bg: "#f8f9fa"
+    tag_text: "#1a73e8"
+
+  # Earthy amber/green tones
+  warm:
+    name: Warm Earth
+    primary: "#b45309"
+    primary_light: "#fef3c7"
+    accent: "#065f46"
+    accent_light: "#d1fae5"
+    background: "#fffbeb"
+    surface: "#fef9ee"
+    surface_light: "#fffcf5"
+    surface_alt: "#fef3c7"
+    text: "#1c1917"
+    text_muted: "#78716c"
+    border: "#e7e5e4"
+    border_strong: "#a8a29e"
+    success: "#065f46"
+    author_bg: "#fef9ee"
+    tag_text: "#92400e"
+
+  # Dark mode — easy on the eyes
+  dark:
+    name: Dark Mode
+    primary: "#60a5fa"
+    primary_light: "#1e3a5f"
+    accent: "#f59e0b"
+    accent_light: "#3d2d00"
+    background: "#0f172a"
+    surface: "#1e293b"
+    surface_light: "#1a2332"
+    surface_alt: "#334155"
+    text: "#f1f5f9"
+    text_muted: "#94a3b8"
+    border: "#334155"
+    border_strong: "#475569"
+    success: "#34d399"
+    author_bg: "#1e293b"
+    tag_text: "#93c5fd"
+
+  # Glow 1: purple with a little yellow
+  glowai:
+    name: Glow 1
+    primary: "#6062c6"
+    primary_light: "#e8e8ff"
+    accent: "#d9c84a"
+    accent_light: "#f7f3d5"
+    background: "#fbfbff"
+    surface: "#f8f8ff"
+    surface_light: "#ffffff"
+    surface_alt: "#ededfa"
+    text: "#1e293b"
+    text_muted: "#64748b"
+    border: "#e2e8f0"
+    border_strong: "#c5c5e8"
+    success: "#10b981"
+    author_bg: "#ffed63"
+    tag_text: "#4547a0"

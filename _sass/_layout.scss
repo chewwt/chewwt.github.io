@@ -1,0 +1,49 @@
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+// Two-column layout: main content + sidebar
+.paper-body {
+  padding: 2.5rem 0;
+}
+
+.paper-grid {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.paper-sidebar {
+  display: none;
+}
+
+.paper-main {
+  min-width: 0;
+}
+
+// Sidebar sits sticky in the right margin beyond the 1040px container.
+// 1fr column stays 976px (matching .container inner width); sidebar overflows via margin.
+// Breakpoint: viewport needs (976/2 + 2rem padding + 2rem gap + 170px sidebar) × 2 ≈ 1360px
+@media (min-width: 1360px) {
+  .paper-grid {
+    grid-template-columns: 1fr 0px;
+    column-gap: 0;
+  }
+
+  .paper-sidebar {
+    display: flex;
+    position: sticky;
+    top: 3rem;
+    align-self: start;
+    margin-left: 2rem;
+    width: 170px;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+}
