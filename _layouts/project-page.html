@@ -39,7 +39,7 @@
     }
   </style>
 
-  <!-- instead of {% seo %} -->
+  <!-- instead of auto seo -->
   {% assign _seo_desc = paper.description | default: paper.abstract | strip_html | truncatewords: 40 %}
   {% assign _seo_title = paper.clean_title | default: paper.title | strip_html %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
