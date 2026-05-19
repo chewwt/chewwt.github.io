@@ -39,7 +39,19 @@
     }
   </style>
 
-  {% seo %}
+  <!-- instead of {% seo %} -->
+  {% assign _seo_desc = paper.description | default: paper.abstract | strip_html | truncatewords: 40 %}
+  {% assign _seo_title = paper.clean_title | default: paper.title | strip_html %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{{ _seo_title }}">
+  <meta property="og:description" content="{{ _seo_desc }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="article">
+  {% if paper.teaser.image != "" %}<meta property="og:image" content="{{ paper.teaser.image | absolute_url }}">{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ _seo_title }}">
+  <meta name="twitter:description" content="{{ _seo_desc }}">
 </head>
 <body>
 
