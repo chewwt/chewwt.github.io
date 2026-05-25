@@ -1,6 +1,7 @@
 ---
 layout: project-page
 data_key: bolt
+title: "BoLT: A Benchmark to Democratize Black-box Optimization Research for Expensive LLM Tasks"
 ---
 
 <div class="section-heading" id="tasks"></div>

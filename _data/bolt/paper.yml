@@ -12,8 +12,13 @@ title: '<span class="title-highlight">[[bolt]]</span>: A Benchmark to Democratiz
 clean_title: "BoLT: A Benchmark to Democratize Black-box Optimization Research for Expensive LLM Tasks"
 short_title: "BoLT"
 
+# description: meta description tag (search engines, social previews); falls back to abstract if omitted
+description: "BoLT is a black-box optimization benchmark grounded in 20k+ real LLM experiments, covering hyperparameter tuning, data mixture, and prompt optimization."
+
+# favicon: browser tab icon; omit to show no icon
 favicon: "assets/images/bolt/favicon.png"
 
+# logo: animated hero image shown at the top of the page; omit to hide
 logo:
   png: "assets/images/bolt/animated-logo.png"
   webp: "assets/images/bolt/animated-logo.webp"
@@ -59,7 +64,7 @@ links:
     url: "https://bolt-bench.readthedocs.io/en/latest/"
     icon: docs
   - label: "Models"
-    url: "https://huggingface.co/collections/chewwt/bolt-models"
+    url: "https://huggingface.co/collections/Glow-AI/bolt"
     icon: huggingface
 
 # ============================================================
@@ -74,6 +79,7 @@ abstract: >
   structure of LLM tasks. [[bolt]] provides surrogate-based benchmarks grounded in real LLM experiments, so everyone
   can evaluate BBO methods against realistic objectives.
 
+# stats: highlight numbers shown as cards below the abstract
 stats:
   - value: "3"
     label: "task families"
