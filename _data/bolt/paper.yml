@@ -13,7 +13,7 @@ clean_title: "BoLT: A Benchmark to Democratize Black-box Optimization Research f
 short_title: "BoLT"
 
 # description: meta description tag (search engines, social previews); falls back to abstract if omitted
-description: "BoLT is a black-box optimization benchmark grounded in 20k+ real LLM experiments, covering hyperparameter tuning, data mixture, and prompt optimization."
+description: "BoLT is a black-box optimization benchmark grounded in real LLM experiments, covering hyperparameter, data mixture, prompt, and parallelism configuration optimization, with emulators trained on 22k+ runs."
 
 # favicon: browser tab icon; omit to show no icon
 favicon: "assets/images/bolt/favicon.png"
@@ -43,10 +43,15 @@ authors:
     url: "https://www.comp.nus.edu.sg/~lowkh/"
 
 # Each author's affiliation index (1-based, matches affiliations list)
-author_affiliations: [1, 1, 1, 1]
+author_affiliations: ["1†", 2, 3, 2]
 
 affiliations:
+  - "University of Washington"
   - "National University of Singapore"
+  - "Singapore-MIT Alliance for Research and Technology"
+
+author_notes:
+  - "†Work done while at NUS."
 
 # ============================================================
 # LINKS  (add/remove/reorder freely)
@@ -74,21 +79,23 @@ tagline: >
   [[bolt]] is the first BBO benchmark grounded in real LLM experiments, accessible without large-scale compute.
 
 abstract: >
-  LLMs involve expensive, derivative-free decisions — hyperparameters, data mixtures, prompts — that black-box
-  optimization (BBO) is built to handle. Yet most BBO research validates on synthetic functions that miss the real
-  structure of LLM tasks. [[bolt]] provides surrogate-based benchmarks grounded in real LLM experiments, so everyone
-  can evaluate BBO methods against realistic objectives.
+  LLMs involve noisy, expensive, derivative-free decisions — hyperparameters, data mixtures, prompts, parallelism
+  strategies — that black-box optimization (BBO) is built to handle. Yet most BBO research validates on synthetic
+  functions that miss the real structure of LLM tasks. [[bolt]] provides problems grounded in real LLM experiments,
+  spanning multi-fidelity, multi-objective, heteroscedastic noise, high-dimensional, and constrained settings, all
+  queryable through lightweight emulators or tabular data. BO methods generally outperform other baselines, but no
+  single method wins across tasks, and methods remain far from optimal on some problems.
 
 # stats: highlight numbers shown as cards below the abstract
 stats:
-  - value: "3"
-    label: "task families"
-  - value: "10"
-    label: "LLM tasks"
-  - value: "20k+"
-    label: "real experiments"
   - value: "4"
-    label: "emulators"
+    label: "task families"
+  - value: "13"
+    label: "LLM problems"
+  - value: "30k+"
+    label: "real experiments"
+  - value: "30+"
+    label: "methods benchmarked"
 
 # ============================================================
 # TEASER / OVERVIEW FIGURE
@@ -98,9 +105,9 @@ teaser:
   image: "assets/images/bolt/overview.png"
   caption: >
     <strong>[[bolt]] replaces slow LLM calls with a fast emulator.</strong>
-    Without an emulator (left), a BBO loop must query real LLM runs which are slow and costly.
-    With [[bolt]] (right), the BBO loop queries a lightweight emulator trained on real LLM experiments,
-    returning emulated observations almost instantly and at negligible cost.
+    Without an emulator (left), each BBO query requires real LLM training and evaluation, which is slow, costly,
+    and hard to reproduce. With [[bolt]] (right), the BBO method queries an emulator (MLP) or tabular data
+    built from real LLM experiments, returning observations almost instantly, at negligible cost, and reproducibly.
 
 # ============================================================
 # ON THIS PAGE — sticky sidebar TOC (remove to hide)

@@ -306,6 +306,14 @@
     justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 320px));
   }
+
+  &.method-cards--2col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 640px) { grid-template-columns: minmax(0, 1fr); }
+
+    td:first-child { white-space: nowrap; }
+    td.wrap { white-space: normal; }
+  }
 }
 
 .method-card {
